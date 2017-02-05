@@ -23,15 +23,14 @@ namespace MyFinance.Data.Configurations
             .WithMany(v => v.Products)
             .Map(m =>
             {
-                m.ToTable("Providings");   //Table d'association
+                m.ToTable("Providings");   
                 m.MapLeftKey("Product");
                 m.MapRightKey("Provider");
             });
 
-            //Inheritance
             Map<Biological>(c =>
             {
-                c.Requires("IsBiological").HasValue(1);  //isBiological is the descreminator
+                c.Requires("IsBiological").HasValue(1);  
             });
             Map<Chemical>(c =>
             {
@@ -39,7 +38,7 @@ namespace MyFinance.Data.Configurations
             });
 
             //One To Many
-            HasOptional(p => p.Category)   // 0,1..*   //if you need 1..* use HasRequired()
+            HasOptional(p => p.Category)   
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)
                 .WillCascadeOnDelete(false);
